@@ -1,11 +1,4 @@
-package parkwisesystem_sec51_g4;
-
-/*
-*  CSC301 Assignment 3
-*  Done by: Zayna Wasma (1084503)
-*/
-
-// Import necessary libraries
+package parkwisesystem;
 import java.util.*;
 
 // Seperate class to organize the data and order it
@@ -48,16 +41,16 @@ class ParkingData implements Comparable<ParkingData> {
 } // end of class
 
 // Define the PARKWISE system class
-public class ParkwiseSystem_Sec51_G4 {
+public class ParkwiseSystem {
 
     // Attributes for the PARKWISE system
     // Define any required attributes here, such as a list or map to store parking data
-    private BST_Sec51_G4<ParkingData> parkingData;
+    private BST<ParkingData> parkingData;
 
     // Constructor for ParkwiseSystem
-    public ParkwiseSystem_Sec51_G4() {
+    public ParkwiseSystem() {
         // Initialize your attributes here
-        parkingData = new BST_Sec51_G4<>();
+        parkingData = new BST<>();
     }
 
     // Method to collect and preprocess data
@@ -116,14 +109,14 @@ public class ParkwiseSystem_Sec51_G4 {
         // Apply algorithms or heuristics to optimize the allocation of parking spaces
         // This might involve determining where to add or remove parking spaces
         System.out.println("");
-        BST_Sec51_G4<ParkingData> prioritizedData = new BST_Sec51_G4<>();
+        BST<ParkingData> prioritizedData = new BST<>();
         inorderPrioritization(parkingData.getRoot(), prioritizedData);
         parkingData = prioritizedData;
         System.out.println("Optimized Parking Allocation (Prioritize Low Occupancy): ");
         parkingData.print();
     }
     
-    private void inorderPrioritization(TreeNode_Sec51_G4<ParkingData> node, BST_Sec51_G4<ParkingData> prioritizedData) {
+    private void inorderPrioritization(TreeNode<ParkingData> node, BST<ParkingData> prioritizedData) {
         if (node != null) {
             inorderPrioritization(node.left, prioritizedData);
             prioritizedData.insert(node.element);
@@ -141,7 +134,7 @@ public class ParkwiseSystem_Sec51_G4 {
         inorderOptimizedParking(parkingData.getRoot());
     }
     
-    private void inorderOptimizedParking(TreeNode_Sec51_G4<ParkingData> root) {
+    private void inorderOptimizedParking(TreeNode<ParkingData> root) {
         if (root == null) return; 
         
         inorderOptimizedParking(root.left);
@@ -151,7 +144,7 @@ public class ParkwiseSystem_Sec51_G4 {
 
     // Main method
     public static void main(String[] args) {
-        ParkwiseSystem_Sec51_G4 parkwise = new ParkwiseSystem_Sec51_G4();
+        ParkwiseSystem parkwise = new ParkwiseSystem();
         parkwise.processData();
         parkwise.analyzeParkingData();
         parkwise.optimizeParking();
