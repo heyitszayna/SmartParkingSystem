@@ -1,15 +1,10 @@
-package parkwisesystem_sec51_g4;
+package parkwisesystem;
 
-/*
-*  CSC301 Assignment 3
-*  Done by: Zayna Wasma (1084503)
-*/
-
-public class TreeNode_Sec51_G4<E extends Comparable<E>> {
+public class TreeNode<E extends Comparable<E>> {
     protected E element;
-    protected TreeNode_Sec51_G4<E> left, right;
+    protected TreeNode<E> left, right;
     
-    public TreeNode_Sec51_G4(E e) {
+    public TreeNode(E e) {
         element = e;
     }
     
@@ -22,7 +17,7 @@ public class TreeNode_Sec51_G4<E extends Comparable<E>> {
         print("", this, false);
     }
     
-    public void print(String prefix, TreeNode_Sec51_G4<E> n, boolean isLeft) {
+    public void print(String prefix, TreeNode<E> n, boolean isLeft) {
         if (n != null) {
             System.out.println(prefix + (isLeft ? "|-- " : "└-- ") + n.element);
             if (n.left != null || n.right != null) {
