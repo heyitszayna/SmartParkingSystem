@@ -1,13 +1,8 @@
-package parkwisesystem_sec51_g4;
+package parkwisesystem;
 
-/*
-*  CSC301 Assignment 3
-*  Done by: Zayna Wasma (1084503)
-*/
-
-public class BST_Integer_Sec51_G4 extends BST_Sec51_G4<Integer> {
+public class BST_Integer extends BST<Integer> {
     
-    public BST_Integer_Sec51_G4(Integer[] array) {
+    public BST_Integer(Integer[] array) {
         super(array);
     }
     
@@ -15,7 +10,7 @@ public class BST_Integer_Sec51_G4 extends BST_Sec51_G4<Integer> {
         return sum(root);
     }
     
-    protected Integer sum(TreeNode_Sec51_G4<Integer> root) {
+    protected Integer sum(TreeNode<Integer> root) {
         if (root == null) return 0;
         return root.element + sum(root.left)+ sum(root.right);
     }
@@ -24,7 +19,7 @@ public class BST_Integer_Sec51_G4 extends BST_Sec51_G4<Integer> {
         return sumLeaves(root);
     }
     
-    protected Integer sumLeaves(TreeNode_Sec51_G4<Integer> node) {
+    protected Integer sumLeaves(TreeNode<Integer> node) {
         if (node == null) return 0;
         if (node.isLeaf()) return node.element;
         return sumLeaves(node.left)+ sumLeaves(node.right);
@@ -35,7 +30,7 @@ public class BST_Integer_Sec51_G4 extends BST_Sec51_G4<Integer> {
         return countOdd(root);
     }
     
-    protected Integer countOdd(TreeNode_Sec51_G4<Integer> node) {
+    protected Integer countOdd(TreeNode<Integer> node) {
         if (node == null) return 0;
         if (node.element % 2 != 0) // it is odd
             return 1 + countOdd(node.left) + countOdd(node.right);
