@@ -1,11 +1,6 @@
-package parkwisesystem_sec51_g4;
+package parkwisesystem;
 
-/*
-*  CSC301 Assignment 3
-*  Done by: Zayna Wasma (1084503)
-*/ 
-
-public interface Tree_Sec51_G4<E> extends Iterable<E> {
+public interface Tree<E> extends Iterable<E> {
     
     /** Return true if the element is in the tree */
     public boolean search(E e);
