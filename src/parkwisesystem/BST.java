@@ -1,19 +1,14 @@
-package parkwisesystem_sec51_g4;
+package parkwisesystem;
 
-/*
-*  CSC301 Assignment 3
-*  Done by: Zayna Wasma (1084503)
-*/
-
-public class BST_Sec51_G4<E extends Comparable<E>> extends AbstractTree_Sec51_G4<E> {
-    protected TreeNode_Sec51_G4<E> root;
+public class BST<E extends Comparable<E>> extends AbstractTree<E> {
+    protected TreeNode<E> root;
     protected int size = 0;
     
     public void print() {
         print("", this.root, true);
     }
     
-    public void print(String prefix, TreeNode_Sec51_G4<E> n, boolean isLeft) {
+    public void print(String prefix, TreeNode<E> n, boolean isLeft) {
         if (n != null) {
             System.out.println(prefix + (isLeft ? "|--" : " └--") + n.element);
             print(prefix + (isLeft ? "|   " : "    "), n.right, true);
@@ -22,17 +17,17 @@ public class BST_Sec51_G4<E extends Comparable<E>> extends AbstractTree_Sec51_G4
     }
     
     /* Create a default binary search tree */
-    public BST_Sec51_G4() { }
+    public BST() { }
     
     /* Create a binary search tree from an array of objects */
-    public BST_Sec51_G4(E[] objects) {
+    public BST(E[] objects) {
         for (int i = 0; i < objects.length; i++)
             insert(objects[i]);
     }
     
     @Override /* Return true if the element is in the tree */
     public boolean search(E e) {
-        TreeNode_Sec51_G4<E> current = root; // Start from the root
+        TreeNode<E> current = root; // Start from the root
         while (current != null) {
             if (e.compareTo(current.element) < 0) 
                 current = current.left;
@@ -44,8 +39,8 @@ public class BST_Sec51_G4<E extends Comparable<E>> extends AbstractTree_Sec51_G4
         return false;
     }
     
-    protected TreeNode_Sec51_G4<E> createNewNode(E e) {
-        return new TreeNode_Sec51_G4<>(e);
+    protected TreeNode<E> createNewNode(E e) {
+        return new TreeNode<>(e);
     }
     
     @Override /* Insert element e into the binary search tree.
@@ -55,8 +50,8 @@ public class BST_Sec51_G4<E extends Comparable<E>> extends AbstractTree_Sec51_G4
             root = createNewNode(e); // Create a new root
         else {
             // Locate the parent node
-            TreeNode_Sec51_G4<E> parent = null;
-            TreeNode_Sec51_G4<E> current = root;
+            TreeNode<E> parent = null;
+            TreeNode<E> current = root;
             while (current != null)
                 if (e.compareTo(current.element) < 0) {
                     parent = current;
@@ -83,7 +78,7 @@ public class BST_Sec51_G4<E extends Comparable<E>> extends AbstractTree_Sec51_G4
     }
     
     /* Inorder traversal from a subtree */
-    protected void inorder(TreeNode_Sec51_G4<E> root) {
+    protected void inorder(TreeNode<E> root) {
         if (root == null) return;
         inorder(root.left);
         System.out.print("\t (" + root.element + ") ");
@@ -96,7 +91,7 @@ public class BST_Sec51_G4<E extends Comparable<E>> extends AbstractTree_Sec51_G4
     }
     
     /* Postorder traversal from a subtree */
-    protected void postorder(TreeNode_Sec51_G4<E> root) {
+    protected void postorder(TreeNode<E> root) {
         if (root == null) return;
         postorder(root.left);
         postorder(root.right);
@@ -109,7 +104,7 @@ public class BST_Sec51_G4<E extends Comparable<E>> extends AbstractTree_Sec51_G4
     }
     
     /* Preorder traversal from a subtree */
-    protected void preorder(TreeNode_Sec51_G4<E> root) {
+    protected void preorder(TreeNode<E> root) {
         if (root == null) return;
         System.out.print("\t (" + root.element + ") ");
         preorder(root.left);
@@ -122,7 +117,7 @@ public class BST_Sec51_G4<E extends Comparable<E>> extends AbstractTree_Sec51_G4
     }
     
     /* Returns the root of the tree */
-    public TreeNode_Sec51_G4<E> getRoot() {
+    public TreeNode<E> getRoot() {
         return root;
     }
     
@@ -133,9 +128,9 @@ public class BST_Sec51_G4<E extends Comparable<E>> extends AbstractTree_Sec51_G4
     }
     
     /* Returns a path from the root leading to the specified element */
-    public java.util.ArrayList<TreeNode_Sec51_G4<E>> path(E e) {
-        java.util.ArrayList<TreeNode_Sec51_G4<E>> list = new java.util.ArrayList<>();
-        TreeNode_Sec51_G4<E> current = root; // Start from the root
+    public java.util.ArrayList<TreeNode<E>> path(E e) {
+        java.util.ArrayList<TreeNode<E>> list = new java.util.ArrayList<>();
+        TreeNode<E> current = root; // Start from the root
 	boolean found = false;
 	while (current != null && !found) {
             list.add(current); // Add the node to the list
@@ -153,8 +148,8 @@ public class BST_Sec51_G4<E extends Comparable<E>> extends AbstractTree_Sec51_G4
                * Return false if the element is not in the tree. */
     public boolean delete(E e) {
         // Locate the node to be deleted and also locate its parent node
-	TreeNode_Sec51_G4<E> parent = null;
-	TreeNode_Sec51_G4<E> current = root; 
+	TreeNode<E> parent = null;
+	TreeNode<E> current = root; 
 	boolean found = false;
 	while (current != null && !found) {
             if (e.compareTo(current.element) < 0) {
@@ -164,7 +159,7 @@ public class BST_Sec51_G4<E extends Comparable<E>> extends AbstractTree_Sec51_G4
                 parent = current;
                 current = current.right;
             } else
-                found = true ; // Element is in the tree pointed at by current
+                found = true; // Element is in the tree pointed at by current
         }
         
         if (found) {
@@ -181,18 +176,18 @@ public class BST_Sec51_G4<E extends Comparable<E>> extends AbstractTree_Sec51_G4
                 // Case 2: The current node has a left child.   
                 // Locate the rightmost node in the left subtree of
                 // the current node and also its parent.
-	        TreeNode_Sec51_G4<E> parentOfRightMost = current; 
-	        TreeNode_Sec51_G4<E> rightMost = current.left; 
+	        TreeNode<E> parentOfRightMost = current; 
+	        TreeNode<E> rightMost = current.left; 
                 
                 while (rightMost.right != null) {
                     parentOfRightMost = rightMost;
                     rightMost = rightMost.right; // Keep going to the right
 	        }
 	
-	        // Replace the element in current by the element in rightMost
+	        // Replace the element in current with the element in rightMost
 	        current.element = rightMost.element; 
 	
-	        // Eliminate rightmost node
+	        // Eliminate the rightmost node
 	        if (parentOfRightMost.right == rightMost)
                     parentOfRightMost.right = rightMost.left;
 	        else
@@ -225,7 +220,7 @@ public class BST_Sec51_G4<E extends Comparable<E>> extends AbstractTree_Sec51_G4
         }
         
         /* Inorder traversal from a subtree */
-        private void inorder(TreeNode_Sec51_G4<E> root) {
+        private void inorder(TreeNode<E> root) {
             if (root == null) return;
             inorder(root.left);
             list.add(root.element);
