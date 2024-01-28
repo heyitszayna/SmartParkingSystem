@@ -1,11 +1,6 @@
-package parkwisesystem_sec51_g4;
+package parkwisesystem;
 
-/*
-*  CSC301 Assignment 3
-*  Done by: Zayna Wasma (1084503)
-*/
-
-public abstract class AbstractTree_Sec51_G4<E> implements Tree_Sec51_G4<E> {
+public abstract class AbstractTree<E> implements Tree<E> {
     
     @Override /** Inorder traversal from the root*/
     public void inorder() {}
